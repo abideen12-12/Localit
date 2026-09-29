@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import { Store, ShoppingBag, MapPin, Search, Shield, User, LogOut } from 'lucide-react';
 
 export default function Navbar({ healthStatus }) {
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
+  const { totalItems } = useCart();
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs">
@@ -77,9 +79,11 @@ export default function Navbar({ healthStatus }) {
               title="Cart"
             >
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                0
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-scale">
+                  {totalItems}
+                </span>
+              )}
             </Link>
 
             {/* Auth / Role based menus */}
