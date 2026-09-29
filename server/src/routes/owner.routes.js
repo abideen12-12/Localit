@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const shopController = require('../controllers/shop.controller');
 const productController = require('../controllers/product.controller');
+const dashboardController = require('../controllers/dashboard.controller');
 const { authenticate, authorize } = require('../middleware/auth');
 
 // All routes under /api/owner require SHOP_OWNER role
 router.use(authenticate, authorize('SHOP_OWNER'));
+
+// Dashboard metrics
+router.get('/dashboard', dashboardController.getOwnerDashboard);
+router.get('/orders', dashboardController.getOwnerOrders);
 
 // Shop profile management
 router.get('/shop', shopController.getOwnerShop);

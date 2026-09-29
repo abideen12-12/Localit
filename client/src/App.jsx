@@ -15,9 +15,14 @@ import CheckoutPage from './pages/customer/CheckoutPage';
 import OrderSuccessPage from './pages/customer/OrderSuccessPage';
 import OrderTrackingPage from './pages/customer/OrderTrackingPage';
 import OrderHistoryPage from './pages/customer/OrderHistoryPage';
+import OwnerDashboardPage from './pages/owner/OwnerDashboardPage';
+import OwnerOrdersPage from './pages/owner/OwnerOrdersPage';
 import ShopProfilePage from './pages/owner/ShopProfilePage';
 import ProductManagementPage from './pages/owner/ProductManagementPage';
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminShopsPage from './pages/admin/AdminShopsPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
+import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import MultiShopConflictModal from './components/cart/MultiShopConflictModal';
@@ -38,7 +43,7 @@ export default function App() {
             <Route path="shops/:id" element={<ShopDetailPage />} />
             <Route path="search" element={<GlobalSearchPage />} />
 
-            {/* Customer Protected Routes */}
+            {/* Customer Routes */}
             <Route
               path="cart"
               element={
@@ -90,6 +95,22 @@ export default function App() {
 
             {/* Shop Owner Protected Routes */}
             <Route
+              path="owner/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['SHOP_OWNER']}>
+                  <OwnerDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="owner/orders"
+              element={
+                <ProtectedRoute allowedRoles={['SHOP_OWNER']}>
+                  <OwnerOrdersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="owner/shop"
               element={
                 <ProtectedRoute allowedRoles={['SHOP_OWNER']}>
@@ -108,10 +129,34 @@ export default function App() {
 
             {/* Admin Protected Routes */}
             <Route
+              path="admin/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="admin/shops"
               element={
                 <ProtectedRoute allowedRoles={['ADMIN']}>
                   <AdminShopsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/users"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <AdminUsersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/orders"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <AdminOrdersPage />
                 </ProtectedRoute>
               }
             />
