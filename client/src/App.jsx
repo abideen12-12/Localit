@@ -24,6 +24,7 @@ import AdminShopsPage from './pages/admin/AdminShopsPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
+import AdminCouponsPage from './pages/admin/AdminCouponsPage';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import MultiShopConflictModal from './components/cart/MultiShopConflictModal';
 import NotFoundPage from './pages/NotFoundPage';
@@ -165,6 +166,14 @@ export default function App() {
               element={
                 <ProtectedRoute allowedRoles={['ADMIN']}>
                   <AdminCategoriesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/coupons"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <AdminCouponsPage />
                 </ProtectedRoute>
               }
             />

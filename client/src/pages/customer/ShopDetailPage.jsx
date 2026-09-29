@@ -317,6 +317,56 @@ export default function ShopDetailPage({ onAddToCart }) {
           )}
         </main>
       </div>
+
+      {/* Verified Customer Reviews Section */}
+      <section className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+          <div>
+            <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              Verified Customer Reviews ({shop.reviews?.length || 0})
+            </h3>
+            <p className="text-xs text-gray-500 mt-0.5">
+              Only neighborhood customers who completed a purchase from this store can review.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            100% Genuine Purchases
+          </div>
+        </div>
+
+        {(!shop.reviews || shop.reviews.length === 0) ? (
+          <div className="py-8 text-center text-xs text-gray-400">
+            No reviews yet for this local store. Be the first to place an order and share your experience!
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {shop.reviews.map((r) => (
+              <div key={r.id} className="p-4 rounded-2xl bg-gray-50 border border-gray-100 space-y-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-gray-900">{r.customer?.name || 'Local Customer'}</span>
+                  <div className="flex items-center gap-0.5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star
+                        key={s}
+                        className={`w-3.5 h-3.5 ${
+                          s <= r.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-600 leading-relaxed italic">"{r.comment || 'Verified purchase'}"</p>
+                <span className="text-[10px] text-gray-400 block pt-1">
+                  Reviewed on {new Date(r.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
+import NotificationBell from './NotificationBell';
 import { Store, ShoppingBag, MapPin, Search, Shield, User, LogOut } from 'lucide-react';
 
 export default function Navbar({ healthStatus }) {
@@ -85,6 +86,9 @@ export default function Navbar({ healthStatus }) {
                 </span>
               )}
             </Link>
+
+            {/* In-app Notification Center Bell */}
+            <NotificationBell />
 
             {/* Auth / Role based menus */}
             {isAuthenticated && user ? (

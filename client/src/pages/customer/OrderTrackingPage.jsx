@@ -12,7 +12,9 @@ import {
   XCircle,
   RotateCcw,
   ShoppingBag,
+  Star,
 } from 'lucide-react';
+import ReviewModal from '../../components/reviews/ReviewModal';
 
 const TRACKING_STEPS = [
   { key: 'PENDING', label: 'Order Placed', desc: 'Sent to local shop' },
@@ -30,6 +32,8 @@ export default function OrderTrackingPage() {
   const [cancelling, setCancelling] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
   const [cancelReason, setCancelReason] = useState('Change of delivery plans');
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
   useEffect(() => {
     fetchOrder();
@@ -188,6 +192,37 @@ export default function OrderTrackingPage() {
         )}
       </div>
 
+      {/* Verified Review Prompt for Delivered Orders */}
+      {isDelivered && (
+        <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-200 rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/20">
+              <Star className="w-6 h-6 fill-white" />
+            </div>
+            <div>
+              <h4 className="text-base font-bold text-gray-900">
+                {reviewSubmitted ? 'Thank you for your verified review!' : `How was your order from ${order.shop?.shopName}?`}
+              </h4>
+              <p className="text-xs text-gray-600 mt-0.5">
+                {reviewSubmitted
+                  ? 'Your neighborhood feedback is live on the store page.'
+                  : 'Rate freshness, store packaging, and delivery speed to help your local community.'}
+              </p>
+            </div>
+          </div>
+
+          {!reviewSubmitted && (
+            <button
+              onClick={() => setReviewModalOpen(true)}
+              className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20 transition flex items-center gap-1.5 shrink-0"
+            >
+              <Star className="w-4 h-4 fill-white" />
+              Write Verified Review
+            </button>
+          )}
+        </div>
+      )}
+
       {/* ORDER ITEMS & HISTORICAL PRICE FREEZE */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-4">
@@ -327,6 +362,18 @@ export default function OrderTrackingPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Verified Review Modal */}
+      {reviewModalOpen && (
+        <ReviewModal
+          order={order}
+          onClose={() => setReviewModalOpen(false)}
+          onReviewSubmitted={() => {
+            setReviewSubmitted(true);
+            setReviewModalOpen(false);
+          }}
+        />
       )}
     </div>
   );

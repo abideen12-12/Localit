@@ -12,6 +12,7 @@ import {
   ArrowRight,
   RefreshCw,
   CheckCircle2,
+  Tag,
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -141,7 +142,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Admin Quick Action Hub */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Link
           to="/admin/shops"
           className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs hover:shadow-md transition space-y-2 group"
@@ -173,6 +174,17 @@ export default function AdminDashboardPage() {
           </div>
           <h3 className="font-bold text-gray-900 text-sm">User Directory</h3>
           <p className="text-xs text-gray-500">Inspect customer and merchant accounts & activity.</p>
+        </Link>
+
+        <Link
+          to="/admin/coupons"
+          className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs hover:shadow-md transition space-y-2 group"
+        >
+          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+            <Tag className="w-5 h-5" />
+          </div>
+          <h3 className="font-bold text-gray-900 text-sm">Coupons & Promos</h3>
+          <p className="text-xs text-gray-500">Configure vouchers, discounts, and order savings.</p>
         </Link>
       </div>
 

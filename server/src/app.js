@@ -13,6 +13,9 @@ const categoryRoutes = require('./routes/category.routes');
 const productRoutes = require('./routes/product.routes');
 const cartRoutes = require('./routes/cart.routes');
 const orderRoutes = require('./routes/order.routes');
+const reviewRoutes = require('./routes/review.routes');
+const couponRoutes = require('./routes/coupon.routes');
+const notificationRoutes = require('./routes/notification.routes');
 const ownerRoutes = require('./routes/owner.routes');
 const adminRoutes = require('./routes/admin.routes');
 
@@ -42,6 +45,9 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/coupons', couponRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/owner', ownerRoutes);
 app.use('/api/admin', adminRoutes);
 
