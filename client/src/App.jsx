@@ -11,6 +11,10 @@ import ShopListingPage from './pages/customer/ShopListingPage';
 import ShopDetailPage from './pages/customer/ShopDetailPage';
 import GlobalSearchPage from './pages/customer/GlobalSearchPage';
 import CartPage from './pages/customer/CartPage';
+import CheckoutPage from './pages/customer/CheckoutPage';
+import OrderSuccessPage from './pages/customer/OrderSuccessPage';
+import OrderTrackingPage from './pages/customer/OrderTrackingPage';
+import OrderHistoryPage from './pages/customer/OrderHistoryPage';
 import ShopProfilePage from './pages/owner/ShopProfilePage';
 import ProductManagementPage from './pages/owner/ProductManagementPage';
 import AdminShopsPage from './pages/admin/AdminShopsPage';
@@ -34,12 +38,44 @@ export default function App() {
             <Route path="shops/:id" element={<ShopDetailPage />} />
             <Route path="search" element={<GlobalSearchPage />} />
 
-            {/* Customer Routes */}
+            {/* Customer Protected Routes */}
             <Route
               path="cart"
               element={
                 <ProtectedRoute allowedRoles={['CUSTOMER', 'SHOP_OWNER', 'ADMIN']}>
                   <CartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <ProtectedRoute allowedRoles={['CUSTOMER', 'SHOP_OWNER', 'ADMIN']}>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <ProtectedRoute allowedRoles={['CUSTOMER', 'SHOP_OWNER', 'ADMIN']}>
+                  <OrderHistoryPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders/:id"
+              element={
+                <ProtectedRoute allowedRoles={['CUSTOMER', 'SHOP_OWNER', 'ADMIN']}>
+                  <OrderTrackingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders/:id/success"
+              element={
+                <ProtectedRoute allowedRoles={['CUSTOMER', 'SHOP_OWNER', 'ADMIN']}>
+                  <OrderSuccessPage />
                 </ProtectedRoute>
               }
             />
