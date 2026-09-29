@@ -9,6 +9,8 @@ const healthRoutes = require('./routes/health.routes');
 const authRoutes = require('./routes/auth.routes');
 const addressRoutes = require('./routes/address.routes');
 const shopRoutes = require('./routes/shop.routes');
+const categoryRoutes = require('./routes/category.routes');
+const productRoutes = require('./routes/product.routes');
 const ownerRoutes = require('./routes/owner.routes');
 const adminRoutes = require('./routes/admin.routes');
 
@@ -34,6 +36,8 @@ app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/shops', shopRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/products', productRoutes);
 app.use('/api/owner', ownerRoutes);
 app.use('/api/admin', adminRoutes);
 

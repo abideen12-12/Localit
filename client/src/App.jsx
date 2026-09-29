@@ -7,8 +7,12 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ProfilePage from './pages/customer/ProfilePage';
 import ShopListingPage from './pages/customer/ShopListingPage';
+import ShopDetailPage from './pages/customer/ShopDetailPage';
+import GlobalSearchPage from './pages/customer/GlobalSearchPage';
 import ShopProfilePage from './pages/owner/ShopProfilePage';
+import ProductManagementPage from './pages/owner/ProductManagementPage';
 import AdminShopsPage from './pages/admin/AdminShopsPage';
+import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -22,8 +26,10 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="shops" element={<ShopListingPage />} />
+          <Route path="shops/:id" element={<ShopDetailPage />} />
+          <Route path="search" element={<GlobalSearchPage />} />
 
-          {/* Customer Protected Routes */}
+          {/* Customer / All Authenticated Users */}
           <Route
             path="profile"
             element={
@@ -42,6 +48,14 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="owner/products"
+            element={
+              <ProtectedRoute allowedRoles={['SHOP_OWNER']}>
+                <ProductManagementPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Admin Protected Routes */}
           <Route
@@ -49,6 +63,14 @@ export default function App() {
             element={
               <ProtectedRoute allowedRoles={['ADMIN']}>
                 <AdminShopsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/categories"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <AdminCategoriesPage />
               </ProtectedRoute>
             }
           />
