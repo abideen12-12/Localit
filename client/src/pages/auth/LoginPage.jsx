@@ -62,35 +62,7 @@ export default function LoginPage() {
           <p className="text-xs text-gray-500">Sign in to your Localit account to continue</p>
         </div>
 
-        {/* Demo Fast Login Pills */}
-        <div className="bg-gray-50 p-3 rounded-2xl border border-gray-100 space-y-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 block text-center">
-            Demo Quick Login Presets
-          </span>
-          <div className="grid grid-cols-3 gap-1.5 text-[11px]">
-            <button
-              type="button"
-              onClick={() => handleQuickLogin('arun@example.com', 'password123')}
-              className="py-1.5 px-2 bg-white hover:bg-emerald-50 border border-gray-200 hover:border-emerald-300 rounded-lg font-medium text-gray-700 hover:text-emerald-700 transition truncate text-center"
-            >
-              Customer
-            </button>
-            <button
-              type="button"
-              onClick={() => handleQuickLogin('owner1@localit.market', 'password123')}
-              className="py-1.5 px-2 bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg font-medium text-gray-700 hover:text-blue-700 transition truncate text-center"
-            >
-              Shop Owner
-            </button>
-            <button
-              type="button"
-              onClick={() => handleQuickLogin('admin@localit.market', 'admin123')}
-              className="py-1.5 px-2 bg-white hover:bg-purple-50 border border-gray-200 hover:border-purple-300 rounded-lg font-medium text-gray-700 hover:text-purple-700 transition truncate text-center"
-            >
-              Admin
-            </button>
-          </div>
-        </div>
+        
 
         {/* Error Alert */}
         {error && (
