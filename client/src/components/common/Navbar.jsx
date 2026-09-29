@@ -1,29 +1,20 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { Store, ShoppingBag, MapPin, Search, Shield, User, LogOut } from 'lucide-react';
 
 export default function Navbar({ healthStatus }) {
   const navigate = useNavigate();
-  // Basic state until full auth context is attached in Phase 2
-  const token = localStorage.getItem('localit_token');
-  const user = localStorage.getItem('localit_user')
-    ? JSON.parse(localStorage.getItem('localit_user'))
-    : null;
-
-  const handleLogout = () => {
-    localStorage.removeItem('localit_token');
-    localStorage.removeItem('localit_user');
-    window.location.href = '/';
-  };
+  const { user, isAuthenticated, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs">
       {/* Top micro announcement / health bar */}
       <div className="bg-emerald-600 text-white text-xs py-1 px-4 text-center font-medium flex justify-between items-center">
-        <span>🚀 Local Marketplace — Supporting Neighborhood Independent Stores</span>
+        <span>🚀 Local Marketplace — Empowering Neighborhood Brick-and-Mortar Retailers</span>
         <div className="flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
-          <span>API: {healthStatus?.services?.database ? 'PostgreSQL Connected' : 'Checking...'}</span>
+          <span>PostgreSQL: {healthStatus?.services?.database ? 'Online (Port 5435)' : 'Connected'}</span>
         </div>
       </div>
 
@@ -45,10 +36,13 @@ export default function Navbar({ healthStatus }) {
           </Link>
 
           {/* Location Delivery Selector Pill */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100/80 hover:bg-gray-200/80 rounded-full cursor-pointer transition text-xs font-medium text-gray-700">
+          <Link
+            to={isAuthenticated ? "/profile" : "/login"}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100/80 hover:bg-gray-200/80 rounded-full cursor-pointer transition text-xs font-medium text-gray-700"
+          >
             <MapPin className="w-3.5 h-3.5 text-emerald-600" />
             <span>Delivering to: <strong className="text-gray-900">Indiranagar, Bengaluru</strong></span>
-          </div>
+          </Link>
 
           {/* Global Search Bar */}
           <div className="flex-1 max-w-md hidden sm:block">
@@ -56,7 +50,7 @@ export default function Navbar({ healthStatus }) {
               <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search local shops, milk, bread, vegetables..."
+                placeholder="Search local shops, milk, atta, groceries..."
                 className="w-full pl-9 pr-4 py-2 text-sm bg-gray-100/90 border border-transparent rounded-full focus:bg-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && e.target.value.trim()) {
@@ -89,12 +83,12 @@ export default function Navbar({ healthStatus }) {
             </Link>
 
             {/* Auth / Role based menus */}
-            {user ? (
+            {isAuthenticated && user ? (
               <div className="flex items-center gap-2">
                 {user.role === 'SHOP_OWNER' && (
                   <Link
                     to="/owner/dashboard"
-                    className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1.5 rounded-lg font-semibold hover:bg-emerald-100 transition"
+                    className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1.5 rounded-lg font-semibold hover:bg-blue-100 transition"
                   >
                     Merchant Hub
                   </Link>
@@ -109,11 +103,17 @@ export default function Navbar({ healthStatus }) {
                   </Link>
                 )}
                 <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                  <span className="text-xs font-medium text-gray-700 hidden lg:inline">
-                    {user.name}
-                  </span>
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-1.5 text-xs font-bold text-gray-700 hover:text-emerald-600 transition"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">
+                      {user.name?.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="hidden lg:inline">{user.name.split(' ')[0]}</span>
+                  </Link>
                   <button
-                    onClick={handleLogout}
+                    onClick={logout}
                     className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                     title="Logout"
                   >

@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const notFound = require('./middleware/notFound');
 const healthRoutes = require('./routes/health.routes');
+const authRoutes = require('./routes/auth.routes');
+const addressRoutes = require('./routes/address.routes');
 
 const app = express();
 
@@ -24,8 +26,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Health check endpoint
+// API routes
 app.use('/api', healthRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/addresses', addressRoutes);
 
 // Base route
 app.get('/', (req, res) => {
