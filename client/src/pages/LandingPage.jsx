@@ -11,18 +11,14 @@ export default function LandingPage() {
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white p-8 sm:p-12 lg:p-16 shadow-2xl">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold tracking-wide">
-            <Zap className="w-3.5 h-3.5 text-emerald-400" />
-            Decentralized Local Quick-Commerce
-          </div>
+          
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
             Shop From Your <span className="text-emerald-400">Neighborhood Stores</span> Online.
           </h1>
 
           <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed font-normal">
-            Blinkit and Zepto control their own dark-store inventory. <strong>Localit is different.</strong> We connect you directly with your favorite local supermarkets, bakeries, and dairies. Compare real-time prices across local stores, order your daily essentials, and get them delivered to your doorstep.
-          </p>
+            <strong>Support your local markets with Localit.</strong> Instead of relying on big e-commerce apps, shop directly from your favorite local supermarkets, bakeries, and dairies. Compare prices, order your daily essentials, and get them delivered to your doorstep while supporting local businesses.          </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
