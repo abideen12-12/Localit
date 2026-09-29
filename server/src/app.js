@@ -8,6 +8,9 @@ const notFound = require('./middleware/notFound');
 const healthRoutes = require('./routes/health.routes');
 const authRoutes = require('./routes/auth.routes');
 const addressRoutes = require('./routes/address.routes');
+const shopRoutes = require('./routes/shop.routes');
+const ownerRoutes = require('./routes/owner.routes');
+const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 
@@ -30,6 +33,9 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/addresses', addressRoutes);
+app.use('/api/shops', shopRoutes);
+app.use('/api/owner', ownerRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Base route
 app.get('/', (req, res) => {
